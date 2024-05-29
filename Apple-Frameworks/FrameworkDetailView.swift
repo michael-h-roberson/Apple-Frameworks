@@ -5,37 +5,64 @@
 //  Created by Michael Roberson on 5/24/24.
 //
 
+//Resume @2:40:10
+
 import SwiftUI
 
-struct DetailView: View {
+struct FrameworkDetailView: View {
+   
     
-    let framework: Framework
-    var body: some View {
-        VStack{
-            Image(framework.imageName)
-                .resizable()
-                .frame(width: 90, height: 90)
-            
-            Text(framework.name)
-                .font(.title2)
-                .fontWeight(.semibold)
-            
-            Text(framework.description)
-                .font(.caption)
-                .fontWeight(.medium)
-            
-            Button {
+        var framework : Framework
+        
+    
+        var body: some View {
+
+            VStack{
+                HStack {
+                    Spacer()
+                    
+                    Button {
+                    } label: {
+                        Image(systemName: "xmark")
+                            .foregroundColor(Color(.label))
+                            .imageScale(.large)
+                        //can use imageScale with SF symbols
+                            .frame(width: 44, height: 44)
+                        //making hitbox larger than the acutual "x"
+                    }
+                   
+                }
                 
-            } label: {
-                LearnMoreButton (title: "Learn More",
-                                 backgroundColor: .red,
-                                 textColor: .white,
-                                 cornerRadius: 5)
+                .padding()
+                
+                Spacer()
+                
+                FrameworkTitleView(framework: framework)
+                   
+                    Text(framework.description)
+                    .padding()
+                    .font(.body)
+                       
+                Spacer()
+                
+                Button {
+                    
+                } label: {
+                    AFButton(title: "Learn More")
+                    
+                
+                    
+
+                }
             }
-            
-            #Preview {
-                DetailView(framework: Framework)
-            }
+        }
+    }
+
+struct FrameworkDetailView_Previews: PreviewProvider {
+        static var previews: some View {
+            FrameworkDetailView(framework: MockData.sampleFramework)
+    }
+}
             
             
             
@@ -50,7 +77,4 @@ struct DetailView: View {
             //    //below we're making the text responsive/shrinkable
             //        .scaledToFit()
             //        .minimumScaleFactor(0.6)
-        }
-    }
-}
 
